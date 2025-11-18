@@ -88,6 +88,7 @@ try {
   id BIGINT UNSIGNED AUTO_INCREMENT NOT NULL,
   user_email VARCHAR(50),
   product_id BIGINT UNSIGNED,
+  product_size VARCHAR(2),
   quantity INT UNSIGNED NOT NULL DEFAULT 1,
   PRIMARY KEY (id),
   FOREIGN KEY (user_email) REFERENCES User(email),
