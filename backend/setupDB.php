@@ -102,5 +102,62 @@ try {
 } catch(PDOException $e) {
   echo $e->getMessage();
 }
+
+//Try to insert data
+try {
+  $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+  // set the PDO error mode to exception
+  $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+  $sql = "INSERT INTO Product (title, price, descript, section, category, thumbnail)
+  VALUES ('Cozy sweatshirt', 49.99, 'A comfortable sweatshirt for your fall needs.', 'Men',  'Men', 'Men/cozy sweatshirt.jpg');
+  INSERT INTO Product (title, price, descript, section, category, thumbnail)
+  VALUES ('Long sleeve button-up shirt', 49.99, 'A stylish long-sleeve shirt.', 'Men',  'Men', 'Men/Long sleeve button-up shirt.jpg');
+  INSERT INTO Product (title, price, descript, section, category, thumbnail)
+  VALUES ('Oversized t-shirt', 49.99, 'A comfortable t-shirt for your fall needs.', 'Men',  'Men', 'Men/cozy sweatshirt.jpg');
+  INSERT INTO Product (title, price, descript, section, category, thumbnail)
+  VALUES ('Pants', 49.99, 'A snazzy pair of pants.', 'Men',  'Men', 'Men/pants.jpg');
+  INSERT INTO Product (title, price, descript, section, category, thumbnail)
+  VALUES ('Shorts', 49.99, 'A comfortable pair of shorts for the summer.', 'Men',  'Men', 'Men/shorts.jpg');
+
+  INSERT INTO Product (title, price, descript, section, category, thumbnail)
+  VALUES ('2pcs set - Hoodie and sweatpants', 44.99, 'A full clothing set that will keep you warm.', 'Women',  'Women', 'Women/2pcs set - Hoodie and sweatpants.jpg');
+  INSERT INTO Product (title, price, descript, section, category, thumbnail)
+  VALUES ('Crop top', 44.99, 'A stylish crop top shirt.', 'Women',  'Women', 'Women/oversized crop shirt.jpg');
+  INSERT INTO Product (title, price, descript, section, category, thumbnail)
+  VALUES ('Oversized t-shirt', 44.99, 'A comfortable t-shirt for your fall needs.', 'Women',  'Women', 'Women/oversized T-shirt.jpg');
+  INSERT INTO Product (title, price, descript, section, category, thumbnail)
+  VALUES ('Pleated wide leg pants', 44.99, 'A comfortable sweatshirt for your fall needs.', 'Women',  'Women', 'Women/Pleated wide leg pants.jpg');
+  INSERT INTO Product (title, price, descript, section, category, thumbnail)
+  VALUES ('Zebra patterned viscose shirt and pants set', 44.99, 'A snazzy pair of pants.', 'Women',  'Women', 'Women/zebra patterned viscose shirt and pants set.jpg');
+
+  INSERT INTO Product (title, price, descript, section, category, thumbnail)
+  VALUES ('2pcs - Shirt and pants set', 29.99, 'A stylish outfit for your child.', 'Kids',  'Kids', 'Kids/2pcs - shirt and pants.jpg');
+  INSERT INTO Product (title, price, descript, section, category, thumbnail)
+  VALUES ('Picnic dress', 29.99, 'Perfect for the summer.', 'Kids',  'Kids', 'Kids/picnic dress.jpg');
+  INSERT INTO Product (title, price, descript, section, category, thumbnail)
+  VALUES ('2pcs - T-shirt and pants set', 29.99, 'A comfortable and casual t-shirt set.', 'Kids',  'Kids', 'Kids/2pcs - T-shirt and pants.jpg');
+  INSERT INTO Product (title, price, descript, section, category, thumbnail)
+  VALUES ('Hoodie', 29.99, 'A comfortable sweatshirt for your fall needs.', 'Kids',  'Kids', 'Kids/Hoodie.jpg');
+  INSERT INTO Product (title, price, descript, section, category, thumbnail)
+  VALUES ('Striped button-up shirt', 29.99, 'A snazzy shirt for your child.', 'Kids',  'Kids', 'Kids/striped button-up shirt.jpg');
+
+  INSERT INTO Product (title, price, descript, section, category, thumbnail)
+  VALUES ('Earrings', 19.99, 'Spice up your look with these earrings.', 'Accessories',  'Accessories', 'Accessories/earrings.jpg');
+  INSERT INTO Product (title, price, descript, section, category, thumbnail)
+  VALUES ('Hat', 19.99, 'Perfect for a day at the beach.', 'Accessories',  'Accessories', 'Accessories/hat.jpg');
+  INSERT INTO Product (title, price, descript, section, category, thumbnail)
+  VALUES ('Necklace', 19.99, 'Spice up your look with this necklace.', 'Accessories',  'Accessories', 'Accessories/necklace.jpg');
+  INSERT INTO Product (title, price, descript, section, category, thumbnail)
+  VALUES ('Scarf', 19.99, 'A comfortable scarf for your fall needs.', 'Accessories',  'Accessories', 'Accessories/Scarf.jpg');
+  INSERT INTO Product (title, price, descript, section, category, thumbnail)
+  VALUES ('Sunglasses', 19.99, 'Perfect for a day at the beach.', 'Accessories',  'Accessories', 'Accessories/Sunglasses.jpg');
+  ";
+  // use exec() because no results are returned
+  $conn->exec($sql);
+  echo "New record created successfully";
+} catch(PDOException $e) {
+  echo $e->getMessage();
+}
+
 $conn = null;
 ?>
