@@ -13,18 +13,18 @@ try {
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     $stmt = $conn->prepare("
-        SELECT title, price, descript, thumbnail FROM `Products` WHERE id = :pId
+        SELECT title, price, descript, thumbnail FROM `Product` WHERE id = :pId
     ");
-
+    
     $stmt->execute([
-        ':pId' => $_SESSION['pId'],
+        ':pId' => $_POST['pId'],
     ]);
 
     $product = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     echo json_encode([
         "success" => true,
-        "product" => $product,
+        "product" => $product[0],
     ]);
 } catch(PDOException $e) {
     echo json_encode(["success" => false, "msg" => "Error: " . $e->getMessage()]);

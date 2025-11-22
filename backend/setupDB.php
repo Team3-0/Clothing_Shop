@@ -111,9 +111,9 @@ try {
   $sql = "INSERT INTO Product (title, price, descript, section, category, thumbnail)
   VALUES ('Cozy sweatshirt', 49.99, 'A comfortable sweatshirt for your fall needs.', 'Men',  'Men', 'Men/cozy sweatshirt.jpg');
   INSERT INTO Product (title, price, descript, section, category, thumbnail)
-  VALUES ('Long sleeve button-up shirt', 49.99, 'A stylish long-sleeve shirt.', 'Men',  'Men', 'Men/Long sleeve button-up shirt.jpg');
+  VALUES ('Long sleeve button-up shirt', 49.99, 'A stylish long-sleeve shirt.', 'Men',  'Men', 'Men/Long Sleeve  button-up shirt.jpg');
   INSERT INTO Product (title, price, descript, section, category, thumbnail)
-  VALUES ('Oversized t-shirt', 49.99, 'A comfortable t-shirt for your fall needs.', 'Men',  'Men', 'Men/cozy sweatshirt.jpg');
+  VALUES ('Oversized t-shirt', 49.99, 'A comfortable t-shirt for your fall needs.', 'Men',  'Men', 'Men/oversized T-shirt.jpg');
   INSERT INTO Product (title, price, descript, section, category, thumbnail)
   VALUES ('Pants', 49.99, 'A snazzy pair of pants.', 'Men',  'Men', 'Men/pants.jpg');
   INSERT INTO Product (title, price, descript, section, category, thumbnail)
@@ -128,7 +128,7 @@ try {
   INSERT INTO Product (title, price, descript, section, category, thumbnail)
   VALUES ('Pleated wide leg pants', 44.99, 'A comfortable sweatshirt for your fall needs.', 'Women',  'Women', 'Women/Pleated wide leg pants.jpg');
   INSERT INTO Product (title, price, descript, section, category, thumbnail)
-  VALUES ('Zebra patterned viscose shirt and pants set', 44.99, 'A snazzy pair of pants.', 'Women',  'Women', 'Women/zebra patterned viscose shirt and pants set.jpg');
+  VALUES ('Zebra patterned viscose shirt and pants set', 44.99, 'A snazzy pair of pants.', 'Women',  'Women', 'Women/zebra.jpg');
 
   INSERT INTO Product (title, price, descript, section, category, thumbnail)
   VALUES ('2pcs - Shirt and pants set', 29.99, 'A stylish outfit for your child.', 'Kids',  'Kids', 'Kids/2pcs - shirt and pants.jpg');
