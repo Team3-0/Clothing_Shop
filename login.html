@@ -284,25 +284,24 @@
         <div class="purchase-item">No purchases yet.</div>
       </div>
       <!-- ORDER TRACKING SECTION ADDED HERE -->
-      <div class="order-tracker">
-        <h3>Order Tracking</h3>
-        <div class="status">
-          <div class="status-step" id="processing">
-            <div class="status-circle"></div>
-            <p>Processing</p>
-          </div>
-          <div class="status-step" id="shipped">
-            <div class="status-circle"></div>
-            <p>Shipped</p>
-          </div>
-          <div class="status-step" id="delivered">
-            <div class="status-circle"></div>
-            <p>Delivered</p>
-          </div>
-        </div>
-        <div id="notification"></div>
-      </div>
-
+      <div class="order-tracker" id="order-tracker" style="display:none;">
+  <h3>Order Tracking</h3>
+  <div class="status">
+    <div class="status-step" id="processing">
+      <div class="status-circle"></div>
+      <p>Processing</p>
+    </div>
+    <div class="status-step" id="shipped">
+      <div class="status-circle"></div>
+      <p>Shipped</p>
+    </div>
+    <div class="status-step" id="delivered">
+      <div class="status-circle"></div>
+      <p>Delivered</p>
+    </div>
+  </div>
+  <div id="notification"></div>
+</div>
       <!-- RETURNS & EXCHANGES SECTION -->
       <div class="returns">
         <h3>Returns & Exchanges</h3>
@@ -429,10 +428,10 @@
       showNotification(`Your order status has changed to: ${status}`);
       console.log(`Email/SMS notification sent for status: ${status}`);
 
-      // Simulated backend timing
+      
       if (stepIndex === 0) {
-        setTimeout(() => updateStatus(1), 10 * 1000); // 10s for demo (replace with 10 min = 10 * 60 * 1000)
-        setTimeout(() => updateStatus(2), 30 * 1000); // 30s for demo (replace with 24hr = 24 * 60 * 60 * 1000)
+        setTimeout(() => updateStatus(1), 10 * 1000); // 10s for demo 
+        setTimeout(() => updateStatus(2), 30 * 1000); // 30s for demo 
       }
     }
 
@@ -454,19 +453,49 @@
 
     // PURCHASE HISTORY
 
-    async function showPurchaseHistory() {
-      const res = await fetch("backend/getOrders.php");
-      const data = await res.json();
+  async function showPurchaseHistory() {
+  const res = await fetch("backend/getOrders.php");
+  const data = await res.json();
 
-      if(data.success) {
-        // replace this with purchase display code
-        console.log(data.orders);
-      } else {
-        alert(data.msg);
-      }
-    }
+  const purchaseHistory = document.getElementById("purchase-history");
+  const tracker = document.getElementById("order-tracker");
 
-    showPurchaseHistory()
+  if (data.success && data.orders.length > 0) {
+
+    purchaseHistory.innerHTML = "<h3>Your Purchase History</h3>";
+
+    data.orders.forEach(order => {
+      let box = document.createElement("div");
+      box.classList.add("purchase-item");
+
+      let itemsList = order.items.map(i => `${i.product_name} (x${i.qty})`).join(", ");
+
+      box.innerHTML = `
+        <strong>Order #${order.id}</strong><br>
+        Items: ${itemsList}<br>
+        Total: $${order.total}
+      `;
+
+      purchaseHistory.appendChild(box);
+    });
+
+    // SHOW ORDER TRACKER when user has orders
+    tracker.style.display = "block";
+
+    // Start the order status animation
+    updateStatus(0);
+
+  } else {
+    purchaseHistory.innerHTML = `
+      <h3>Your Purchase History</h3>
+      <div class="purchase-item">No purchases yet.</div>
+    `;
+
+    // HIDE ORDER TRACKER when no purchases
+    tracker.style.display = "none";
+  }
+}
+
 
   </script>
 </body>
