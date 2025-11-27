@@ -1,3 +1,4 @@
+(() => {
 let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
 
 function saveWishlist() {
@@ -117,3 +118,4 @@ function renderWishlist(containerId) {
 }
 
 document.addEventListener("DOMContentLoaded", () => renderWishlist("wishlist-content"));
+})();

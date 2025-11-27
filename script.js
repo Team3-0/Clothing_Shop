@@ -1,4 +1,4 @@
-
+(() => {
 // SLIDESHOW 
 // ==========================
 
@@ -58,13 +58,11 @@ document.querySelectorAll(".dropdown-content a").forEach((link) => {
   });
 });
 
-document.querySelector('nav a[href="#"]').addEventListener('click', (e) => {
-  e.preventDefault();
-// ==========================
-// "HOME" 
-// ==========================
 const homeNavLink = document.querySelector('nav a[href="#"]');
 if (homeNavLink) {
+  // ==========================
+  // "HOME" 
+  // ==========================
   homeNavLink.addEventListener("click", (e) => {
     e.preventDefault();
 
@@ -86,7 +84,8 @@ if (homeNavLink) {
 // ==========================
 // "SHOP NOW" button
 // ==========================
-document.addEventListener("DOMContentLoaded", () => {
+function initShopNow() {
+
   const shopNowBtn = document.querySelector(".hero .hero-text button");
   if (!shopNowBtn) return;
 
@@ -111,7 +110,13 @@ document.addEventListener("DOMContentLoaded", () => {
       }, 50);
     }
   });
-});
+};
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initShopNow, { once: true });
+} else {
+  initShopNow();
+}
 
 // ==========================
 // INITIAL HERO VISIBILITY
@@ -635,6 +640,7 @@ const Cart = {
     const modalAddBtn = document.querySelector("#product-modal .add-to-cart");
     if (modalAddBtn) {
       modalAddBtn.addEventListener("click", () => {
+
         const titleEl = document.getElementById("modal-title");
         const priceEl = document.getElementById("modal-price");
         const imageEl = document.getElementById("modal-image");
@@ -761,4 +767,4 @@ const Cart = {
 document.addEventListener("DOMContentLoaded", () => {
   Cart.init();
 });
- });
+})();
