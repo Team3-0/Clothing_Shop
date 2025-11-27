@@ -118,4 +118,5 @@ function renderWishlist(containerId) {
 }
 
 document.addEventListener("DOMContentLoaded", () => renderWishlist("wishlist-content"));
+
 })();

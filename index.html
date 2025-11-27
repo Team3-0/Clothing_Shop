@@ -266,50 +266,56 @@
         return wishlist.some(item => item.title === product.title);
       }
 
-  function updateHeartIcon() {
-    if (!currentProduct) return;
-    heart.textContent = isInWishlist(currentProduct) ? "❤️" : "♡";
-  }
-
-  async function openModal(product) {
-    let data = new FormData();
-    data.append("pId", [product.id])
-
-    let result = await fetch("backend/getProductInfo.php", {
-      method: "POST",
-      body: data
-    });
-
-    let resultData = await result.json();
-    if(resultData.success){
-      pInfo = resultData.product;
-
-      modalImg.src = 'images/' + pInfo.thumbnail;
-      modalTitle.textContent = pInfo.title;
-      modalPrice.textContent = `$${pInfo.price.toFixed(2)}`;
-      modalSizes.innerHTML = '';
-
-      if (product.section === 'accessories') {
-        const btn = document.createElement('button');
-        btn.textContent = 'One Size';
-        btn.classList.add('active');
-        modalSizes.appendChild(btn);
-      } else {
-        ['XS','S','M','L','XL'].forEach(size => {
-          const btn = document.createElement('button');
-          btn.textContent = size;
-          btn.addEventListener('click', () => {
-            document.querySelectorAll('.sizes button').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-          });
-          modalSizes.appendChild(btn);
-        });
+      function updateHeartIcon() {
+        if (!currentProduct) return;
+        heart.textContent = isInWishlist(currentProduct) ? "❤️" : "♡";
       }
-    }
 
-    updateHeartIcon();
-    modal.style.display = 'flex';
-  }
+      async function openModal(product) {
+        let tempProduct = {section: product.section || ""};
+        let data = new FormData();
+        data.append("pId", [product.id])
+
+        let result = await fetch("backend/getProductInfo.php", {
+          method: "POST",
+          body: data
+        });
+
+        let resultData = await result.json();
+        if(resultData.success){
+          pInfo = resultData.product;
+
+          modalImg.src = 'images/' + pInfo.thumbnail;
+          modalTitle.textContent = pInfo.title;
+          modalPrice.textContent = `$${pInfo.price.toFixed(2)}`;
+          modalSizes.innerHTML = '';
+
+          tempProduct.title = pInfo.title;
+          tempProduct.image = modalImg.src;
+          tempProduct.price = Number(pInfo.price);
+
+          if (product.section === 'accessories') {
+            const btn = document.createElement('button');
+            btn.textContent = 'One Size';
+            btn.classList.add('active');
+            modalSizes.appendChild(btn);
+          } else {
+            ['XS','S','M','L','XL'].forEach(size => {
+              const btn = document.createElement('button');
+              btn.textContent = size;
+              btn.addEventListener('click', () => {
+                document.querySelectorAll('.sizes button').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+              });
+              modalSizes.appendChild(btn);
+            });
+          }
+        }
+
+        currentProduct = tempProduct;
+        updateHeartIcon();
+        modal.style.display = 'flex';
+      }
 
       heart.addEventListener('click', () => {
         if (!currentProduct) return;
