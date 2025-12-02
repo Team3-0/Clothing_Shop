@@ -21,7 +21,6 @@
             <li><a href="#" data-target="accessories">Accessories</a></li>
           </ul>
         </li>
-        <li><a href="#">CONTACT</a></li>
       </ul>
     </nav>
 
@@ -287,7 +286,7 @@
 
           modalImg.src = 'images/' + pInfo.thumbnail;
           modalTitle.textContent = pInfo.title;
-          modalPrice.textContent = `$${pInfo.price.toFixed(2)}`;
+          modalPrice.textContent = `$${Number(pInfo.price).toFixed(2)}`;
           modalSizes.innerHTML = '';
 
           tempProduct.title = pInfo.title;

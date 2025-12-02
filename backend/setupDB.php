@@ -40,7 +40,7 @@ try {
   $sql = 
   "CREATE TABLE Product (
   id BIGINT UNSIGNED AUTO_INCREMENT NOT NULL,
-  title VARCHAR(30) NOT NULL,
+  title VARCHAR(150) NOT NULL,
   price FLOAT NOT NULL,
   descript VARCHAR(150) NOT NULL,
   section VARCHAR(30) NOT NULL,
