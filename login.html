@@ -352,6 +352,8 @@
         profileSection.style.display = "block";
         displayUsername.textContent = `👤 ${username}`;
         updateStatus(0);
+
+        showPurchaseHistory();
       }
     }
 
@@ -368,13 +370,15 @@
 
         let result = await fetch("backend/login.php", {
             method: "POST",
-            body: data
+            body: data ,
+            credentials: "include"
         });
 
         let resultData = await result.json();
         
         if(resultData.success){
           showLoggedIn();
+          showPurchaseHistory();
         } else {
           let createAcc = true;
 
@@ -385,7 +389,8 @@
 
             let result = await fetch("backend/createAccount.php", {
               method: "POST",
-              body: data
+              body: data ,
+              credentials: "include"
             });
 
             let resultData = await result.json();
@@ -457,11 +462,15 @@
     // PURCHASE HISTORY
 
   async function showPurchaseHistory() {
-  const res = await fetch("backend/getOrders.php");
+  const res = await fetch("backend/getOrders.php", {
+    method: "POST",
+    credentials: "include"
+  });
+
   const data = await res.json();
 
   const purchaseHistory = document.getElementById("purchase-history");
-  const tracker = document.getElementById("order-tracker");
+  const tracker = document.querySelector(".order-tracker");
 
   if (data.success && data.orders.length > 0) {
 
@@ -471,21 +480,20 @@
       let box = document.createElement("div");
       box.classList.add("purchase-item");
 
-      let itemsList = order.items.map(i => `${i.product_name} (x${i.qty})`).join(", ");
+      let itemsList = order.items.map(i => `${i.product_id} (x${i.quantity})`).join(", ");
 
       box.innerHTML = `
         <strong>Order #${order.id}</strong><br>
         Items: ${itemsList}<br>
-        Total: $${order.total}
+        Total: $${order.total}<br>
+        Date: ${order.purchase_date}
       `;
 
       purchaseHistory.appendChild(box);
     });
 
-    // SHOW ORDER TRACKER when user has orders
+    // SHOW order tracker
     tracker.style.display = "block";
-
-    // Start the order status animation
     updateStatus(0);
 
   } else {
@@ -494,10 +502,10 @@
       <div class="purchase-item">No purchases yet.</div>
     `;
 
-    // HIDE ORDER TRACKER when no purchases
     tracker.style.display = "none";
   }
 }
+
 
 
   </script>
